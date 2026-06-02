@@ -15,13 +15,13 @@ class RutaViewSet(viewsets.ModelViewSet):
     ordering_fields    = ["id", "codigo"]
 
 class PaqueteViewSet(viewsets.ModelViewSet):
-    queryset           = Paquete.objects.select_related("plan").all().order_by("nombre")
+    queryset           = Paquete.objects.select_related("plan").all().order_by("destinatario")
     serializer_class   = PaqueteSerializer
     permission_classes = [IsAdminOrReadOnly]
     filter_backends    = [DjangoFilterBackend, SearchFilter, OrderingFilter]
-    filterset_fields   = ["plan", "activo"]
-    search_fields      = ["nombre", "cedula"]
-    ordering_fields    = ["id", "nombre", "creado_en"]
+    filterset_fields   = ["ruta", "tipo", "entregado"]
+    search_fields      = ["codigo_rastreo", "destinatario", "entregado"]
+    ordering_fields    = ["id", "codigo_rastreo", "destinatario"]
 
     def get_permissions(self):
         # GET /api/socios/ es público sin token
