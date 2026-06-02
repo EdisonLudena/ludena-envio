@@ -15,7 +15,7 @@ class RutaViewSet(viewsets.ModelViewSet):
     ordering_fields    = ["id", "codigo"]
 
 class PaqueteViewSet(viewsets.ModelViewSet):
-    queryset           = Paquete.objects.select_related("plan").all().order_by("destinatario")
+    queryset           = Paquete.objects.select_related("ruta").all().order_by("destinatario")
     serializer_class   = PaqueteSerializer
     permission_classes = [IsAdminOrReadOnly]
     filter_backends    = [DjangoFilterBackend, SearchFilter, OrderingFilter]
